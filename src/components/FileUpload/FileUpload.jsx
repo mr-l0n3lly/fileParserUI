@@ -22,7 +22,7 @@ const FileUpload = (props) => {
             listeners={listeners}
             clearPendingOnAdd
             destination={{
-                url: 'http://localhost:3000/api/v1/upload/file',
+                url: 'http://104.131.52.57:3000/api/v1/upload/file',
                 headers: {
                     Authorization: props.token,
                 },
