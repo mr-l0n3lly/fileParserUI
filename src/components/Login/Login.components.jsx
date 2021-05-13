@@ -6,7 +6,7 @@ import './Login.styless.scss'
 
 async function loginUser(credentials) {
     try {
-        let response = await fetch('http://localhost:3000/api/v1/users/login', {
+        let response = await fetch('http://104.131.52.57/:3000/api/v1/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
