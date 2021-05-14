@@ -6,7 +6,7 @@ import useUser from "../App/useUser";
 
 async function loginUser(credentials) {
     try {
-        let response = await fetch('http://localhost:3000/api/v1/users/register', {
+        let response = await fetch('http://104.131.52.57:3000/api/v1/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const Profile = () => {
 
     const getCompany = async (user) => {
         try {
-            let response = await fetch('http://localhost:3000/api/v1/users/company', {
+            let response = await fetch('http://104.131.52.57:3000/api/v1/users/company', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
