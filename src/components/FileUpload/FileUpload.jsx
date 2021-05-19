@@ -49,7 +49,31 @@ const FileUpload = (props) => {
                 {
                     response.length ? (
                         <>
-                            <div className={`"rounded-full rounded ${response[0] === 'Success' ? 'bg-green-500' : 'bg-red-500'}  h-24 w-24 p-10 flex flex-col items-center justify-center color-white"`}>{ response[0] === 'Success' ? `Success!` : `Eroare!`}</div>
+                            {/*<div className={`"rounded-full rounded ${response[0] === 'Success' ? 'bg-green-500' : 'bg-red-500'}  h-24 w-24 p-10 flex flex-col items-center justify-center color-white"`}>{ response[0] === 'Success' ? `Success!` : `Eroare!`}</div>*/}
+                                <div className={`w-20 h-20 mx-auto p-2 ${response[0] === 'Success' ? 'bg-green-400' : 'bg-red-400'} text-white rounded-full mt-8 mb-6 flex align-middle`}>
+                                    {
+                                        response[0] === 'Success' ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                 stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        ) : (
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        )
+                                    }
+
+                                </div>
+
+                            {
+                                response[0] === 'Success' ? (
+                                    <h1>Success</h1>
+                                ): (
+                                    <h1>Eroare la incarcare!</h1>
+                                )
+                            }
 
                             <ul className="mt-6 list-disc">
                                 {response.map((item) => {
