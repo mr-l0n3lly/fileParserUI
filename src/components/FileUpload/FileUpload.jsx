@@ -69,7 +69,7 @@ const FileUpload = (props) => {
 
                             {
                                 response[0] === 'Success' ? (
-                                    <h1>Success</h1>
+                                    <h1>Datele au fost incarcate cu success</h1>
                                 ): (
                                     <h1>Eroare la incarcare!</h1>
                                 )
