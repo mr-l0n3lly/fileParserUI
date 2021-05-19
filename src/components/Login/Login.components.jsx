@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 
+import {ENV} from '../../env'
+
 import '../../App.scss'
 import './Login.styless.scss'
 
 async function loginUser(credentials) {
     try {
-        let response = await fetch('http://104.131.52.57:3000/api/v1/users/login', {
+        let response = await fetch(`http://${ENV.API_HOST}/api/v1/users/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -19,7 +19,7 @@ const Home = () => {
                 <section className="w-full max-w-7xl mx-auto">
 
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">Welcome <br />
-                        {user.user.lastName}
+                        {user.user.company}
                     </h1>
 
                     <div className="flex justify-end">

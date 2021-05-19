@@ -3,6 +3,8 @@ import React, {useMemo, useState} from 'react'
 import Uploady, {UPLOADER_EVENTS, useUploady} from '@rpldy/uploady'
 import UploadButton from '@rpldy/upload-button'
 
+import {ENV} from '../../env'
+
 import UploadProgress from './UploadProgress'
 
 const FileUpload = (props) => {
@@ -22,7 +24,7 @@ const FileUpload = (props) => {
             listeners={listeners}
             clearPendingOnAdd
             destination={{
-                url: 'http://104.131.52.57:3000/api/v1/upload/file',
+                url: `http://${ENV.API_HOST}/api/v1/upload/file`,
                 headers: {
                     Authorization: props.token,
                 },
