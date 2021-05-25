@@ -395,7 +395,7 @@ const Profile = () => {
                                                 </span>
                                                 <input
                                                     className="rounded-md w-full bg-gray-200 py-3 pl-16 pr-6 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out"
-                                                    type="text" name="firstName" placeholder="First Name"
+                                                    type="text" name="firstName" placeholder="Nume"
                                                     value={credentials.firstName}
                                                     onChange={handleInput} />
                                             </div>
@@ -412,7 +412,7 @@ const Profile = () => {
                                                 </span>
                                                 <input
                                                     className="rounded-md w-full bg-gray-200 py-3 pl-16 pr-6 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out"
-                                                    type="text" name="lastName" placeholder="Last Name"
+                                                    type="text" name="lastName" placeholder="Prenume"
                                                     value={credentials.lastName}
                                                     onChange={handleInput} />
                                             </div>
@@ -454,7 +454,7 @@ const Profile = () => {
                                                 <button
                                                     className="w-full text-center py-3 px-6 rounded-full text-white bg-green-400 hover:bg-blue-600 transition duration-300 ease-in-out"
                                                     onClick={registerHandler}
-                                                >Adauga
+                                                >Adaugă
                                                 </button>
                                             </div>
                                         </form>
@@ -478,11 +478,11 @@ const Profile = () => {
                         <table className="w-full text-left mt-9">
                             <thead>
                             <tr>
-                                <th className="py-2 px-3 bg-gray-100">Nume prenume</th>
-                                <th className="py-2 px-3 bg-gray-100">Data încărcare/ora</th>
-                                <th className="py-2 px-3 bg-gray-100">Numărul Total Poliță</th>
-                                <th className="py-2 px-3 bg-gray-100">Numărul Total Rbns</th>
-                                <th className="py-2 px-3 bg-gray-100">Numărul Total Plăți</th>
+                                <th className="py-2 px-3 bg-gray-100">Nume</th>
+                                <th className="py-2 px-3 bg-gray-100">Data</th>
+                                <th className="py-2 px-3 bg-gray-100">Polițe</th>
+                                <th className="py-2 px-3 bg-gray-100">Rbns</th>
+                                <th className="py-2 px-3 bg-gray-100">Plăți</th>
                             </tr>
                             </thead>
                             <tbody>

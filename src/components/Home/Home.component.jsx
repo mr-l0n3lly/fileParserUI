@@ -18,7 +18,7 @@ const Home = () => {
 
                 <section className="w-full max-w-7xl mx-auto">
 
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">Welcome <br />
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">
                         {user.user.company}
                     </h1>
 
@@ -27,7 +27,7 @@ const Home = () => {
                             className="mr-4 flex items-center rounded-md bg-gray-300 py-3 px-8 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out text-lg font-bold text-gray-600 mt-5"
                             to="/profile"
                         >
-                            <span className="mr-1">Profile</span>
+                            <span className="mr-1">Profil</span>
                         </Link>
                         <button
                             className="flex items-center rounded-md bg-gray-300 py-3 px-8 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out text-lg font-bold text-gray-600 mt-5"
@@ -36,7 +36,7 @@ const Home = () => {
                                 window.location.href = '/';
                             }}
                         >
-                            <span className="mr-1">Logout</span>
+                            <span className="mr-1">Ieșire</span>
                             <span className="w-5 text-black">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

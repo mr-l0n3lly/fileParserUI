@@ -2,10 +2,17 @@ import React, {useMemo, useState} from 'react'
 
 import Uploady, {UPLOADER_EVENTS, useUploady} from '@rpldy/uploady'
 import UploadButton from '@rpldy/upload-button'
+import { asUploadButton } from "@rpldy/upload-button";
 
 import {ENV} from '../../env'
 
 import UploadProgress from './UploadProgress'
+
+const DivUploadButton = asUploadButton((props) => {
+    return <div {...props} style={{ cursor: "pointer" }}>
+        Încarcă
+    </div>
+});
 
 const FileUpload = (props) => {
     const [response, setResponse] = useState([])
@@ -32,11 +39,11 @@ const FileUpload = (props) => {
             accept=".xlsx"
         >
             <div className="bg-white rounded-lg px-4 py-10 sm:px-12 lg:px-24 mt-3">
-                <strong className="text-lg md:text-xl font-bold">Upload file</strong>
+                <strong className="text-lg md:text-xl font-bold">Încarcă fișier</strong>
                 <label
                     className="block relative mt-8 border border-dashed border-gray-400 rounded-lg relative overflow-hidden hover:border-gray-700 transition duration-300 ease-in-out">
                     <div className="p-5 flex flex-col items-center justify-center">
-                        <UploadButton className="rounded-md bg-gray-300 py-3 px-8 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out text-lg font-bold text-gray-600 mt-5"  />
+                        <DivUploadButton className="rounded-md bg-gray-300 py-3 px-8 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out text-lg font-bold text-gray-600 mt-5"  />
                     </div>
                 </label>
             </div>

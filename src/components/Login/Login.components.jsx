@@ -61,7 +61,7 @@ const Login = ({setUser}) => {
                         </div>
                         <div className="w-full md:w-1/2 px-3 mt-9 md:mt-0">
 
-                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">Member Login</h1>
+                            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">MOOREDATA</h1>
 
                             <form onSubmit={handleSubmit}>
                                 <div className="mt-9 relative">
@@ -77,7 +77,7 @@ const Login = ({setUser}) => {
                                         className="rounded-md w-full bg-gray-200 py-3 pl-16 pr-6 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out"
                                         type="text"
                                         name=""
-                                        placeholder="Username"
+                                        placeholder="Nume utilizator"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
@@ -95,7 +95,7 @@ const Login = ({setUser}) => {
                                         className="rounded-md w-full bg-gray-200 py-3 pl-16 pr-6 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out"
                                         type="password"
                                         name=""
-                                        placeholder="Password"
+                                        placeholder="Parola"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
@@ -107,23 +107,11 @@ const Login = ({setUser}) => {
                                 }
                                 <div className="mt-9">
                                     <button
-                                        className="w-full text-center py-3 px-6 rounded-full text-white bg-green-400 hover:bg-blue-600 transition duration-300 ease-in-out">LOGIN
+                                        className="w-full text-center py-3 px-6 rounded-full text-white bg-green-400 hover:bg-blue-600 transition duration-300 ease-in-out">Autentificare
                                     </button>
                                 </div>
                             </form>
 
-                            <div className="flex justify-end mt-9 md:-mb-16 md:mt-16 lg:-mb-32 lg:mt-32">
-                                <a href="#" className="flex items-center">
-                                    <span className="mr-1">Get Support</span>
-                                    <span className="w-5">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                  d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                        </svg>
-							        </span>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </section>
