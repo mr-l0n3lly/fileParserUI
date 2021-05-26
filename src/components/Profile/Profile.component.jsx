@@ -250,6 +250,10 @@ const Profile = () => {
     const registerHandler = async (e) => {
         e.preventDefault()
 
+        if (credentials.company.includes('Numele companiei')) {
+            setError('Pentru a creea un utilizator este nevoie de a fi selectata o companie')
+        }
+
         if (error) {
             return
         }
