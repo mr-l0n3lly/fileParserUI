@@ -84,13 +84,39 @@ const Profile = () => {
     const [confirmPwd, setConfirmPwd] = useState('')
 
     const [error, setError] = useState()
+    const [errorNew, setErrorNew] = useState()
 
     const handleSelect = (e) => {
         if (!e.target.value.includes('Nume')) {
+            setError('')
             setCredentials({
                 ...credentials,
                 company: e.target.value
             })
+        } else {
+            setError('Pentru a crea un utilizator este nevoie de a fi selectata o eroare')
+        }
+    }
+
+    const checkPass = (password, setter) => {
+        if (password.length < 8) {
+            setter('Parola mai mica de 8 caractere')
+        } else {
+            setter('')
+
+            let regExp = /[A-Z]/
+
+            if (!regExp.test(password)) {
+                setter('Parola nu contine litere mari')
+            } else {
+                regExp = /[0-9]/
+
+                if (!regExp.test(password)) {
+                    setter('Parola nu contine cifre')
+                } else {
+                    setter('')
+                }
+            }
         }
     }
 
@@ -129,6 +155,14 @@ const Profile = () => {
                 })
                 break
             case 'userEmail':
+                let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+                if (!re.test(e.target.value)) {
+                    setError('Email format incorect')
+                } else {
+                    setError('')
+                }
+
                 setCredentials((prev) => {
                     return {
                         ...prev,
@@ -139,26 +173,7 @@ const Profile = () => {
         }
 
         if (e.target.name === 'password') {
-            if (e.target.value.length < 8) {
-                setError('Parola mai mica de 8 caractere')
-            } else {
-                setError('')
-
-                let regExp = /[A-Z]/
-
-                if (!regExp.test(e.target.value)) {
-                    setError('Parola nu contine litere mari')
-                } else {
-                    regExp = /[0-9]/
-
-                    if (!regExp.test(e.target.value)) {
-                        setError('Parola nu contine cifre')
-                    } else {
-                        setError('')
-                    }
-                }
-            }
-
+            checkPass(e, setError)
         }
     }
 
@@ -173,7 +188,7 @@ const Profile = () => {
             .then(json => {
                 setCompanies(json)
             })
-    }, [loaded])
+    }, [loaded, user.token])
 
     useEffect(() => {
         fetch(`http://${ENV.API_HOST}/api/v1/users/stats`, {
@@ -188,9 +203,29 @@ const Profile = () => {
     const updatePassword = async (e) => {
         e.preventDefault()
 
+        if (!oldPwd) {
+            setErrorNew('Parola veche nu este setata')
+            return
+        }
+
+        if (oldPwd === newPwd) {
+            setErrorNew('Parola noua nu poate fi parola veche')
+            return
+        }
+
         if (newPwd !== confirmPwd) {
-            setError('Nu sa confirmat parolele')
+            setErrorNew('Nu sa confirmat parolele')
         } else {
+            checkPass(newPwd, setErrorNew)
+            if (errorNew) {
+                return
+            }
+
+            checkPass(confirmPwd, setErrorNew)
+            if (errorNew) {
+                return
+            }
+
             const response = await newPassword({
                 user,
                 oldPassword: oldPwd,
@@ -213,6 +248,10 @@ const Profile = () => {
 
     const registerHandler = async (e) => {
         e.preventDefault()
+
+        if (error) {
+            return
+        }
 
         const response = await loginUser({
             user,
@@ -285,7 +324,7 @@ const Profile = () => {
                                         <input
                                             onChange={(e) => setOldPwd((prev) => e.target.value)}
                                             className="rounded-md w-full bg-gray-200 py-3 pl-16 pr-6 border-2 border-transparent focus:border-gray-400 focus:bg-transparent transition duration-300 ease-in-out"
-                                            type="password" name="" placeholder="Parola actuala" value={oldPwd}/>
+                                            type="password" name="" placeholder="Parola actuala" value={oldPwd} />
                                     </div>
                                     <div className="mt-9 relative">
 								<span
@@ -321,6 +360,9 @@ const Profile = () => {
                                             className="w-full text-center py-3 px-6 rounded-full text-white bg-green-400 hover:bg-blue-600 transition duration-300 ease-in-out">Actualizare
                                         </button>
                                     </div>
+                                    {errorNew ? (
+                                        <p className="text-red-500 text-xs italic">{errorNew}</p>
+                                    ) : null}
                                 </form>
                             </div>
                             {
@@ -487,17 +529,21 @@ const Profile = () => {
                             </thead>
                             <tbody>
                             {
-                                stats.status ? stats.data.map((item, index) => {
+                                stats.status ? stats.data.sort((a, b) => {
+                                    return new Date(b.DateTime) - new Date(a.DateTime)
+                                }).map((item, index) => {
+                                    let current_datetime = new Date(item.DateTime)
+                                    let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds()
                                     return (
                                         <tr key={index}>
                                             <td className="p-3">{user.user.firstName} {user.user.lastName}</td>
-                                            <td className="p-3">{item.DateTime}</td>
+                                            <td className="p-3">{formatted_date.toString()}</td>
                                             <td className="p-3">{item.TotalPolicies}</td>
                                             <td className="p-3">{item.TotalPayments}</td>
                                             <td className="p-3">{item.TotalRbns}</td>
                                         </tr>
                                     )
-                                }): null
+                                }) : null
                             }
                             </tbody>
                         </table>
