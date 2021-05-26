@@ -173,7 +173,7 @@ const Profile = () => {
         }
 
         if (e.target.name === 'password') {
-            checkPass(e, setError)
+            checkPass(e.target.value, setError)
         }
     }
 
@@ -198,7 +198,7 @@ const Profile = () => {
                 'Authorization': user.token
             }
         }).then(response => response.json()).then(json => setStats(json))
-    }, [loaded])
+    }, [loaded, user.token])
 
     const updatePassword = async (e) => {
         e.preventDefault()
