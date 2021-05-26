@@ -94,7 +94,7 @@ const Profile = () => {
                 company: e.target.value
             })
         } else {
-            setError('Pentru a crea un utilizator este nevoie de a fi selectata o eroare')
+            setError('Pentru a creea un utilizator este nevoie de a fi selectata o companie')
         }
     }
 
@@ -121,6 +121,7 @@ const Profile = () => {
     }
 
     const handleInput = (e) => {
+        // eslint-disable-next-line default-case
         switch (e.target.name) {
             case 'username':
                 setCredentials((prev) => {
