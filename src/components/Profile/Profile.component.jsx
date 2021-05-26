@@ -76,7 +76,7 @@ const Profile = () => {
         firstName: '',
         userEmail: '',
         role: 'User',
-        company: 99
+        company: '--Nume companie--'
     })
 
     const [oldPwd, setOldPwd] = useState('')
