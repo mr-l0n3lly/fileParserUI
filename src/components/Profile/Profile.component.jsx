@@ -100,24 +100,23 @@ const Profile = () => {
 
     const checkPass = (password, setter) => {
         if (password.length < 8) {
-            setter('Parola mai mica de 8 caractere')
+            return 'Parola mai mica de 8 caractere'
         } else {
-            setter('')
 
             let regExp = /[A-Z]/
 
             if (!regExp.test(password)) {
-                setter('Parola nu contine litere mari')
+                return 'Parola nu contine litere mari'
             } else {
                 regExp = /[0-9]/
 
                 if (!regExp.test(password)) {
-                    setter('Parola nu contine cifre')
-                } else {
-                    setter('')
+                    return 'Parola nu contine cifre'
                 }
             }
         }
+
+        return false
     }
 
     const handleInput = (e) => {
@@ -217,13 +216,13 @@ const Profile = () => {
         if (newPwd !== confirmPwd) {
             setErrorNew('Parola nouă nu coincide cu parola nouă repetată')
         } else {
-            checkPass(newPwd, setErrorNew)
-            if (errorNew) {
+            let error = checkPass(newPwd, setErrorNew)
+            if (error) {
                 return
             }
 
-            checkPass(confirmPwd, setErrorNew)
-            if (errorNew) {
+            error = checkPass(confirmPwd, setErrorNew)
+            if (error) {
                 return
             }
 
