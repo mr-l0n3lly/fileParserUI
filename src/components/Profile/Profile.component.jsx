@@ -215,7 +215,7 @@ const Profile = () => {
         }
 
         if (newPwd !== confirmPwd) {
-            setErrorNew('Nu sa confirmat parolele')
+            setErrorNew('Parola nouă nu coincide cu parola nouă repetată')
         } else {
             checkPass(newPwd, setErrorNew)
             if (errorNew) {
@@ -234,9 +234,9 @@ const Profile = () => {
             })
 
             if (!response.status) {
-                setError('Nu sa putut reseta parola')
+                setErrorNew('Parola veche incorecta')
                 setTimeout(() => {
-                    setError('')
+                    setErrorNew('')
                 }, 3000)
             } else {
                 setMessage('Parola a fost resetata cu success')
