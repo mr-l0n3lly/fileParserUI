@@ -218,11 +218,13 @@ const Profile = () => {
         } else {
             let error = checkPass(newPwd, setErrorNew)
             if (error) {
+                setErrorNew(error)
                 return
             }
 
             error = checkPass(confirmPwd, setErrorNew)
             if (error) {
+                setErrorNew(error)
                 return
             }
 
