@@ -173,7 +173,7 @@ const Profile = () => {
         }
 
         if (e.target.name === 'password') {
-            checkPass(e.target.value, setError)
+            setError(checkPass(e.target.value, setError))
         }
     }
 
