@@ -1,8 +1,10 @@
-import React, {useMemo, useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 
 import Uploady, {UPLOADER_EVENTS, useUploady} from '@rpldy/uploady'
 import UploadButton from '@rpldy/upload-button'
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { asUploadButton } from "@rpldy/upload-button";
+import tenor from '../../assets/tenor.gif';
 
 import {ENV} from '../../env'
 
@@ -16,15 +18,41 @@ const DivUploadButton = asUploadButton((props) => {
 
 const FileUpload = (props) => {
     const [response, setResponse] = useState([])
+    const [loading, setLoading] = useState(false);
 
-    const listeners = useMemo(
-        () => ({
-            [UPLOADER_EVENTS.ITEM_FINISH]: (item) => {
-                setResponse(item.uploadResponse.data.data)
-            },
-        }),
-        []
-    )
+    const [count, setCount] = useState({
+        prev: 1,
+        next: 10
+    })
+    
+    const [hasMore, setHasMore] = useState(true);
+
+    const [current, setCurrent] = useState(response.slice(count.prev, count.next))
+    const getMoreData = () => {
+        if (current.length === response.length) {
+            setHasMore(false);
+            return;
+        }
+
+        setTimeout(() => {
+            setCurrent(current.concat(response.slice(count.prev + 10, count.next + 10)))
+        }, 1)
+
+        setCount((prevState) => ({ prev: prevState.prev + 10, next: prevState.next + 10 }))
+    }
+
+    const listeners = useMemo(() => ({
+        [UPLOADER_EVENTS.ITEM_FINISH]: (item) => {
+            setResponse(item.uploadResponse.data.data)
+        },
+        [UPLOADER_EVENTS.ITEM_START]: (item) => {
+            setLoading(true);
+        },
+    }),[])
+
+    useEffect(() => {
+        setCurrent(response.slice(count.prev, count.next));
+    }, [response])
 
     return (
         <Uploady
@@ -52,7 +80,7 @@ const FileUpload = (props) => {
                 <div className="rounded-full bg-gray-200 overflow-hidden mt-4 mb-4">
                     <UploadProgress className="h-3 bg-green-400 rounded-full"/>
                 </div>
-
+                { loading && !response.length && <img src={tenor} />}
                 {
                     response.length ? (
                         <>
@@ -83,10 +111,21 @@ const FileUpload = (props) => {
                             }
 
                             <ul className="mt-6 list-disc">
-                                {response.map((item) => {
-                                    if (item !== 'Success')
-                                        return <li>{item}</li>
-                                })}
+                            <InfiniteScroll
+                                dataLength={current.length}
+                                next={getMoreData}
+                                hasMore={hasMore}
+                                loader={<h4>Loading...</h4>}
+                            >
+                                <div>
+                                    {current && current.map(((item, index) => (
+                                    <div key={index} className="post">
+                                        <p>{item}</p>
+                                    </div>
+                                    )))
+                                    }
+                                </div>
+                            </InfiniteScroll>
                             </ul>
                         </>
                     ) : null
