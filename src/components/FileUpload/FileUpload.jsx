@@ -21,7 +21,7 @@ const FileUpload = (props) => {
     const [loading, setLoading] = useState(false);
 
     const [count, setCount] = useState({
-        prev: 1,
+        prev: 0,
         next: 10
     })
     
@@ -47,6 +47,7 @@ const FileUpload = (props) => {
         },
         [UPLOADER_EVENTS.ITEM_START]: (item) => {
             setLoading(true);
+            setResponse([]);
         },
     }),[])
 
@@ -115,7 +116,7 @@ const FileUpload = (props) => {
                                 dataLength={current.length}
                                 next={getMoreData}
                                 hasMore={hasMore}
-                                loader={<h4>Loading...</h4>}
+                                loader={<h4>...</h4>}
                             >
                                 <div>
                                     {current && current.map(((item, index) => (
